@@ -1,0 +1,61 @@
+﻿@page "/"
+<link href="css/login.css" rel="stylesheet" />
+
+
+<div class="content-container">
+    <div class="login-section">
+        <h2>Login</h2>
+        <EditForm Model="@loginModel" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div>
+                <label>Email</label>
+                <InputText @bind-Value="loginModel.Email" class="form-input" placeholder="Type your email" />
+            </div>
+            <div>
+                <label>Password</label>
+                <InputText @bind-Value="loginModel.Password" type="password" class="form-input" placeholder="Type your password" />
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="remember-me" />
+                <label for="remember-me">Remember this device</label>
+            </div>
+            <br />
+            <div class="links">
+                <a href="/forgot-password">Forgot Password? Click Here!</a>
+                <a href="/resend-confirmation">Resend email confirmation</a>
+            </div>
+            <br/>
+            <button type="submit" class="login-button">Log In</button>
+        </EditForm>
+    </div>
+
+    <div class="signup-section">
+        <div class="container">
+            <h2>New User?</h2>
+            <p>Sign up to learn more!<br><br></p>
+            <a href="/register" class="signup-button">Register new account</a>
+        </div>
+
+    </div>
+
+    </div>
+
+
+
+@code {
+    private LoginModel loginModel = new LoginModel();
+
+    private void HandleValidSubmit()
+    {
+        // Handle form submission logic here
+        Console.WriteLine($"Logging in {loginModel.Email}");
+    }
+
+    public class LoginModel
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+}
